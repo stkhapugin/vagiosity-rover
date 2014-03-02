@@ -7,12 +7,17 @@
 //
 
 #import "VRAppDelegate.h"
+#import "VRVagiosityController.h"
 
-@implementation VRAppDelegate
+@implementation VRAppDelegate{
+    VRVagiosityController * controller;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    controller = [VRVagiosityController new];
+    [controller sendValues:@[@(255), @(127), @(63), @(32)]];
     return YES;
 }
 							

@@ -21,6 +21,9 @@
 		596FBB6218BE2D9500367E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB4418BE2D9500367E4E /* UIKit.framework */; };
 		596FBB6A18BE2D9500367E4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 596FBB6818BE2D9500367E4E /* InfoPlist.strings */; };
 		596FBB6C18BE2D9500367E4E /* Vagiosity_RoverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 596FBB6B18BE2D9500367E4E /* Vagiosity_RoverTests.m */; };
+		598F349118C376E2005D3E8A /* VRToneGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 598F349018C376E2005D3E8A /* VRToneGenerator.m */; };
+		598F349318C37703005D3E8A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598F349218C37703005D3E8A /* AudioToolbox.framework */; };
+		598F349718C39910005D3E8A /* VRVagiosityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 598F349618C39910005D3E8A /* VRVagiosityController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		596FBB6718BE2D9500367E4E /* Vagiosity-RoverTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Vagiosity-RoverTests-Info.plist"; sourceTree = "<group>"; };
 		596FBB6918BE2D9500367E4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		596FBB6B18BE2D9500367E4E /* Vagiosity_RoverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vagiosity_RoverTests.m; sourceTree = "<group>"; };
+		598F348F18C376E2005D3E8A /* VRToneGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRToneGenerator.h; sourceTree = "<group>"; };
+		598F349018C376E2005D3E8A /* VRToneGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRToneGenerator.m; sourceTree = "<group>"; };
+		598F349218C37703005D3E8A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		598F349518C39910005D3E8A /* VRVagiosityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRVagiosityController.h; sourceTree = "<group>"; };
+		598F349618C39910005D3E8A /* VRVagiosityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRVagiosityController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598F349318C37703005D3E8A /* AudioToolbox.framework in Frameworks */,
 				596FBB4318BE2D9500367E4E /* CoreGraphics.framework in Frameworks */,
 				596FBB4518BE2D9500367E4E /* UIKit.framework in Frameworks */,
 				596FBB4118BE2D9500367E4E /* Foundation.framework in Frameworks */,
@@ -101,6 +110,7 @@
 		596FBB3F18BE2D9500367E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				598F349218C37703005D3E8A /* AudioToolbox.framework */,
 				596FBB4018BE2D9500367E4E /* Foundation.framework */,
 				596FBB4218BE2D9500367E4E /* CoreGraphics.framework */,
 				596FBB4418BE2D9500367E4E /* UIKit.framework */,
@@ -112,6 +122,7 @@
 		596FBB4618BE2D9500367E4E /* Vagiosity-Rover */ = {
 			isa = PBXGroup;
 			children = (
+				598F349418C398EA005D3E8A /* Rover Manipulations */,
 				596FBB4F18BE2D9500367E4E /* VRAppDelegate.h */,
 				596FBB5018BE2D9500367E4E /* VRAppDelegate.m */,
 				596FBB5218BE2D9500367E4E /* Main.storyboard */,
@@ -150,6 +161,25 @@
 				596FBB6818BE2D9500367E4E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		598F348E18C376CE005D3E8A /* Tone Generation */ = {
+			isa = PBXGroup;
+			children = (
+				598F348F18C376E2005D3E8A /* VRToneGenerator.h */,
+				598F349018C376E2005D3E8A /* VRToneGenerator.m */,
+			);
+			name = "Tone Generation";
+			sourceTree = "<group>";
+		};
+		598F349418C398EA005D3E8A /* Rover Manipulations */ = {
+			isa = PBXGroup;
+			children = (
+				598F348E18C376CE005D3E8A /* Tone Generation */,
+				598F349518C39910005D3E8A /* VRVagiosityController.h */,
+				598F349618C39910005D3E8A /* VRVagiosityController.m */,
+			);
+			name = "Rover Manipulations";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				596FBB5718BE2D9500367E4E /* VRViewController.m in Sources */,
+				598F349118C376E2005D3E8A /* VRToneGenerator.m in Sources */,
 				596FBB5118BE2D9500367E4E /* VRAppDelegate.m in Sources */,
 				596FBB4D18BE2D9500367E4E /* main.m in Sources */,
+				598F349718C39910005D3E8A /* VRVagiosityController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +493,7 @@
 				596FBB7118BE2D9500367E4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		596FBB7218BE2D9500367E4E /* Build configuration list for PBXNativeTarget "Vagiosity-RoverTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +502,7 @@
 				596FBB7418BE2D9500367E4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
