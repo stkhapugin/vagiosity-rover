@@ -7,9 +7,12 @@
 //
 
 #import "VRViewController.h"
+#import "VRVagiosityController.h"
+
 
 @interface VRViewController ()
-
+@property (nonatomic, strong) VRVagiosityController * controller;
+@property (nonatomic, weak) IBOutlet UISwitch * freqSwitch;
 @end
 
 @implementation VRViewController
@@ -17,13 +20,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    // Override point for customization after application launch.
+    self.controller = [VRVagiosityController new];
+    [self switchPositionChanged:self.freqSwitch];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)switchPositionChanged:(UISwitch *)sender{
+    if (sender.isOn){
+        [self.controller sendValues:@[@(0), @(100), @(255), @(42)]];
+    } else {
+        [self.controller sendSynchroimpulses];
+    }
+}
+
+- (void) dealloc {
+    self.controller = nil;
+}
+
+- (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender{
+    self.controller.packetsPerSecond = (int)pow(2, sender.selectedSegmentIndex);
 }
 
 @end
