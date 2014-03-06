@@ -36,9 +36,11 @@ void setup()
   #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
   #endif 
 
-  cbi(ADCSRA, ADPS2);
-  sbi(ADCSRA, ADPS1);
-  sbi(ADCSRA, ADPS0);
+//011
+//100
+  sbi(ADCSRA, ADPS2);
+  cbi(ADCSRA, ADPS1);
+  cbi(ADCSRA, ADPS0);
   
   
   Serial.begin(9600);
@@ -58,9 +60,10 @@ int PEAKS_TO_COUNT = 7;
 
 int absMax = 0;
 
-int data[100];
-long time[100];
-int dataCount = 110;
+const int dataMax = 20;
+int data[dataMax*2];
+long time[dataMax*2];
+int dataCount = dataMax + 1;
 
 int vals[3];
 int valIndex;
@@ -73,16 +76,33 @@ int r = 0;
 void loop()
 {
   int val = analogRead(A0);
+  long cTime = micros();
   
 /*  r++;
   if (r == 10000) {
     r = 0;
     Serial.println(val);
-  }*/
-  
-  long cTime = micros();
+  }
   
   
+  if (dataCount < dataMax) {
+    data[dataCount] = val;
+    time[dataCount] = cTime;
+    if (dataCount == dataMax - 1) {
+      for (int i = 0 ; i < dataMax; i ++)
+      {
+        Serial.print(time[i]);
+        Serial.print("\t");
+        Serial.println(data[i]);
+        Serial.print("\n");
+      }
+      //delay(3000);
+    }
+  }
+  dataCount++;
+  
+  int x = digitalRead(2);
+  if (x) dataCount = 0;*/
   
   vals[valIndex] = val;
   valIndex++;
@@ -101,7 +121,7 @@ void loop()
         int freq = PEAKS_TO_COUNT * 1000000 / interval;
       
         prints++;
-        if (prints == 10) {
+        if (prints == 100 || freq < 400) {
           Serial.print("Freq: ");
           Serial.println(freq);
           prints = 0;

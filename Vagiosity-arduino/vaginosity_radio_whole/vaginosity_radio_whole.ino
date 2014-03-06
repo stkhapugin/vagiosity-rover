@@ -79,6 +79,9 @@ void loop() {
         rightAcc = acc;
       }
       
+      leftAcc = 0;
+      rightAcc = 0;
+      
       if (leftAcc < 0) {
         analogWrite(leftMinusPin, 255.0 * leftAcc);
         analogWrite(leftPlusPin, 0);
