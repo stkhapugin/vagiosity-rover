@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Vagiosity-Controller/Vagiosity-Controller.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Vagiosity-Rover/Vagiosity-Rover.xcodeproj">
+   </FileRef>
+</Workspace>
