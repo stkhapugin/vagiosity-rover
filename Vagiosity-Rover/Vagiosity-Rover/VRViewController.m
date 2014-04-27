@@ -8,11 +8,11 @@
 
 #import "VRViewController.h"
 #import "VRVagiosityController.h"
-
+#import "VRControllerServer.h"
 
 @interface VRViewController ()
 @property (nonatomic, strong) VRVagiosityController * controller;
-@property (nonatomic, weak) IBOutlet UISwitch * freqSwitch;
+@property (nonatomic, strong) VRControllerServer * server;
 @end
 
 @implementation VRViewController
@@ -29,6 +29,8 @@
     
     self.controller = [VRVagiosityController new];
     [self sendCurrentValues];
+    self.server = [VRControllerServer new];
+    [self.server startServer];
 }
 
 - (void) viewWillAppear:(BOOL)animated{

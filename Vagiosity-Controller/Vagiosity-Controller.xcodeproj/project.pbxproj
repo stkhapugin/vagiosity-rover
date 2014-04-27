@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5950B1D3190D41F7000E5767 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5950B1D2190D41F7000E5767 /* MultipeerConnectivity.framework */; };
+		5950B1DD190D5516000E5767 /* VCControllerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5950B1DC190D5516000E5767 /* VCControllerClient.m */; };
 		596FBB8218BE2DB000367E4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB8118BE2DB000367E4E /* Foundation.framework */; };
 		596FBB8418BE2DB000367E4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB8318BE2DB000367E4E /* CoreGraphics.framework */; };
 		596FBB8618BE2DB000367E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB8518BE2DB000367E4E /* UIKit.framework */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5950B1D2190D41F7000E5767 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		5950B1DB190D5516000E5767 /* VCControllerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCControllerClient.h; sourceTree = "<group>"; };
+		5950B1DC190D5516000E5767 /* VCControllerClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCControllerClient.m; sourceTree = "<group>"; };
 		596FBB7E18BE2DB000367E4E /* Vagiosity-Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vagiosity-Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		596FBB8118BE2DB000367E4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		596FBB8318BE2DB000367E4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5950B1D3190D41F7000E5767 /* MultipeerConnectivity.framework in Frameworks */,
 				596FBB8418BE2DB000367E4E /* CoreGraphics.framework in Frameworks */,
 				596FBB8618BE2DB000367E4E /* UIKit.framework in Frameworks */,
 				596FBB8218BE2DB000367E4E /* Foundation.framework in Frameworks */,
@@ -79,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5950B1D4190D4E81000E5767 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				5950B1DB190D5516000E5767 /* VCControllerClient.h */,
+				5950B1DC190D5516000E5767 /* VCControllerClient.m */,
+			);
+			name = Connectivity;
+			sourceTree = "<group>";
+		};
 		596FBB7518BE2DB000367E4E = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +116,7 @@
 		596FBB8018BE2DB000367E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5950B1D2190D41F7000E5767 /* MultipeerConnectivity.framework */,
 				596FBB8118BE2DB000367E4E /* Foundation.framework */,
 				596FBB8318BE2DB000367E4E /* CoreGraphics.framework */,
 				596FBB8518BE2DB000367E4E /* UIKit.framework */,
@@ -112,6 +128,7 @@
 		596FBB8718BE2DB000367E4E /* Vagiosity-Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5950B1D4190D4E81000E5767 /* Connectivity */,
 				596FBB9018BE2DB000367E4E /* VCAppDelegate.h */,
 				596FBB9118BE2DB000367E4E /* VCAppDelegate.m */,
 				596FBB9318BE2DB000367E4E /* Main.storyboard */,
@@ -200,6 +217,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Sibers;
 				TargetAttributes = {
+					596FBB7D18BE2DB000367E4E = {
+						DevelopmentTeam = SUAWT97CSE;
+					};
 					596FBB9E18BE2DB000367E4E = {
 						TestTargetID = 596FBB7D18BE2DB000367E4E;
 					};
@@ -253,6 +273,7 @@
 				596FBB8E18BE2DB000367E4E /* main.m in Sources */,
 				596FBB9818BE2DB000367E4E /* VCViewController.m in Sources */,
 				596FBB9218BE2DB000367E4E /* VCAppDelegate.m in Sources */,
+				5950B1DD190D5516000E5767 /* VCControllerClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +400,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vagiosity-Controller/Vagiosity-Controller-Prefix.pch";
 				INFOPLIST_FILE = "Vagiosity-Controller/Vagiosity-Controller-Info.plist";
@@ -392,6 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Vagiosity-Controller/Vagiosity-Controller-Prefix.pch";
 				INFOPLIST_FILE = "Vagiosity-Controller/Vagiosity-Controller-Info.plist";
@@ -461,6 +484,7 @@
 				596FBBB218BE2DB000367E4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		596FBBB318BE2DB000367E4E /* Build configuration list for PBXNativeTarget "Vagiosity-ControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +493,7 @@
 				596FBBB518BE2DB000367E4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
