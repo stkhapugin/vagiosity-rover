@@ -11,9 +11,6 @@
 @interface VRVagiosityController : NSObject
 
 - (void) sendValues:(NSArray *)controlValues;
-- (void) sendSynchroimpulses;
-
-@property (nonatomic) int packetsPerSecond;
-
-
+- (void) playValuesOnce;
+- (void) playValuesContinously;
 @end

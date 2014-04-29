@@ -7,23 +7,26 @@
 //
 
 #import "VCViewController.h"
+#import "VCControllerClient.h"
 
 @interface VCViewController ()
+
+@property (nonatomic, strong) VCControllerClient * client;
 
 @end
 
 @implementation VCViewController
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:animated];
 	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.client = [VCControllerClient new];
+    [self.client connectIfPossible];
+    self.client.connectionBlock = ^
+    {
+        [self.client sendValues:@[@(1), @(2), @(3), @(4)]];
+    };
 }
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592D72FF190D26E400A8C454 /* VRTonePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 592D72FE190D26E400A8C454 /* VRTonePlayer.m */; };
+		5950B1D7190D4E98000E5767 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5950B1D6190D4E98000E5767 /* MultipeerConnectivity.framework */; };
+		5950B1DA190D4ED4000E5767 /* VRControllerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5950B1D9190D4ED4000E5767 /* VRControllerServer.m */; };
 		596FBB4118BE2D9500367E4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB4018BE2D9500367E4E /* Foundation.framework */; };
 		596FBB4318BE2D9500367E4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB4218BE2D9500367E4E /* CoreGraphics.framework */; };
 		596FBB4518BE2D9500367E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB4418BE2D9500367E4E /* UIKit.framework */; };
@@ -37,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		592D72FD190D26E400A8C454 /* VRTonePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRTonePlayer.h; sourceTree = "<group>"; };
+		592D72FE190D26E400A8C454 /* VRTonePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRTonePlayer.m; sourceTree = "<group>"; };
+		5950B1D6190D4E98000E5767 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		5950B1D8190D4ED4000E5767 /* VRControllerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRControllerServer.h; sourceTree = "<group>"; };
+		5950B1D9190D4ED4000E5767 /* VRControllerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRControllerServer.m; sourceTree = "<group>"; };
 		596FBB3D18BE2D9500367E4E /* Vagiosity-Rover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vagiosity-Rover.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		596FBB4018BE2D9500367E4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		596FBB4218BE2D9500367E4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5950B1D7190D4E98000E5767 /* MultipeerConnectivity.framework in Frameworks */,
 				598F349318C37703005D3E8A /* AudioToolbox.framework in Frameworks */,
 				596FBB4318BE2D9500367E4E /* CoreGraphics.framework in Frameworks */,
 				596FBB4518BE2D9500367E4E /* UIKit.framework in Frameworks */,
@@ -88,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5950B1D5190D4E89000E5767 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				5950B1D8190D4ED4000E5767 /* VRControllerServer.h */,
+				5950B1D9190D4ED4000E5767 /* VRControllerServer.m */,
+			);
+			name = Connectivity;
+			sourceTree = "<group>";
+		};
 		596FBB3418BE2D9500367E4E = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +128,7 @@
 		596FBB3F18BE2D9500367E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5950B1D6190D4E98000E5767 /* MultipeerConnectivity.framework */,
 				598F349218C37703005D3E8A /* AudioToolbox.framework */,
 				596FBB4018BE2D9500367E4E /* Foundation.framework */,
 				596FBB4218BE2D9500367E4E /* CoreGraphics.framework */,
@@ -122,6 +141,7 @@
 		596FBB4618BE2D9500367E4E /* Vagiosity-Rover */ = {
 			isa = PBXGroup;
 			children = (
+				5950B1D5190D4E89000E5767 /* Connectivity */,
 				598F349418C398EA005D3E8A /* Rover Manipulations */,
 				596FBB4F18BE2D9500367E4E /* VRAppDelegate.h */,
 				596FBB5018BE2D9500367E4E /* VRAppDelegate.m */,
@@ -168,6 +188,8 @@
 			children = (
 				598F348F18C376E2005D3E8A /* VRToneGenerator.h */,
 				598F349018C376E2005D3E8A /* VRToneGenerator.m */,
+				592D72FD190D26E400A8C454 /* VRTonePlayer.h */,
+				592D72FE190D26E400A8C454 /* VRTonePlayer.m */,
 			);
 			name = "Tone Generation";
 			sourceTree = "<group>";
@@ -283,10 +305,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592D72FF190D26E400A8C454 /* VRTonePlayer.m in Sources */,
 				596FBB5718BE2D9500367E4E /* VRViewController.m in Sources */,
 				598F349118C376E2005D3E8A /* VRToneGenerator.m in Sources */,
 				596FBB5118BE2D9500367E4E /* VRAppDelegate.m in Sources */,
 				596FBB4D18BE2D9500367E4E /* main.m in Sources */,
+				5950B1DA190D4ED4000E5767 /* VRControllerServer.m in Sources */,
 				598F349718C39910005D3E8A /* VRVagiosityController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
