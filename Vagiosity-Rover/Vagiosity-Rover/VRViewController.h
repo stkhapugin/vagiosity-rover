@@ -10,4 +10,7 @@
 
 @interface VRViewController : UIViewController
 
+@property (nonatomic, strong) IBOutletCollection(UISlider) NSArray * valueSliders;
+@property (nonatomic ,strong) IBOutletCollection(UILabel)  NSArray * valueLabels;
+
 @end

@@ -8,37 +8,58 @@
 
 #import "VRViewController.h"
 #import "VRVagiosityController.h"
-
+#import "VRControllerServer.h"
 
 @interface VRViewController ()
 @property (nonatomic, strong) VRVagiosityController * controller;
-@property (nonatomic, weak) IBOutlet UISwitch * freqSwitch;
+@property (nonatomic, strong) VRControllerServer * server;
 @end
 
 @implementation VRViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Override point for customization after application launch.
-    self.controller = [VRVagiosityController new];
-    [self switchPositionChanged:self.freqSwitch];
-}
-
-- (IBAction)switchPositionChanged:(UISwitch *)sender{
-    if (sender.isOn){
-        [self.controller sendValues:@[@(0), @(100), @(255), @(42)]];
-    } else {
-        [self.controller sendSynchroimpulses];
-    }
-}
 
 - (void) dealloc {
     self.controller = nil;
 }
 
-- (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender{
-    self.controller.packetsPerSecond = (int)pow(2, sender.selectedSegmentIndex);
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    NSAssert(self.valueLabels.count == self.valueSliders.count, @"Number of values should match number of sliders");
+    
+    self.controller = [VRVagiosityController new];
+    [self sendCurrentValues];
+    self.server = [VRControllerServer new];
+    [self.server startServer];
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self updateLabels];
+}
+
+- (void) sendCurrentValues {
+    [self.controller sendValues:[self.valueSliders valueForKey:@"value"]];
+}
+
+- (void) updateLabels {
+    for (int i = 0; i<self.valueLabels.count; i++){
+        UILabel * label = self.valueLabels[i];
+        UISlider * slider = self.valueSliders[i];
+        label.text = [NSString stringWithFormat:@"%2.0x", (int)slider.value];
+    }
+}
+
+- (IBAction)switchValueChanged:(id)sender{
+    [self updateLabels];
+    [self sendCurrentValues];
+}
+
+- (IBAction)playOncePressed:(id)sender{
+    [self.controller playValuesOnce];
+}
+
+- (IBAction)playPressed:(id)sender{
+    [self.controller playValuesContinously];
+}
 @end
