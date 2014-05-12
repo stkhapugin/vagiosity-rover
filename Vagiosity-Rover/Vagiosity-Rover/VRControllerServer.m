@@ -73,12 +73,6 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
         withContext:(NSData *)context
   invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
-    if (self.session != nil){
-        NSLog(@"Blocked duplicate peer: %@", [peerID displayName]);
-        invitationHandler(NO, nil);
-        return;
-    }
-    
     self.session = [[MCSession alloc] initWithPeer:self.ownPeerID
                                   securityIdentity:nil
                               encryptionPreference:MCEncryptionNone];

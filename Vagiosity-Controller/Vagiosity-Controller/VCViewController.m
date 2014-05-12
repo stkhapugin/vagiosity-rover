@@ -28,7 +28,7 @@
     self.client = [VCControllerClient new];
     [self.client connectIfPossible];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(tick) userInfo:nil repeats:YES];
 }
 
 - (void) tick {

@@ -14,14 +14,15 @@
 - (OSStatus) renderToneWithAudioBufferList:(AudioBufferList **)ioDataStar inNumberFrames:(UInt32)inNumberFrames;
 - (void) stop;
 
-@property (nonatomic) Float32 * leftChannelBuffer;
-@property (nonatomic) Float32 * rightChannelBuffer;
+@property (atomic) Float32 * leftChannelBuffer;
+@property (atomic) Float32 * rightChannelBuffer;
 @property (nonatomic) NSUInteger signalLength;
 @property (nonatomic) NSUInteger lastBufferedFrame;
 @property (nonatomic) AudioComponentInstance toneUnit;
 @property (nonatomic) int sampleRate;
 @property (nonatomic) BOOL playsOnce;
 @property (nonatomic) BOOL writesZeroes;
+@property (nonatomic, retain) NSLock * audioLock;
 
 @end
     
@@ -58,6 +59,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     self = [super init];
     if (self){
         [self initializeAudioSession];
+        self.audioLock = [NSLock new];
     }
     
     return self;
@@ -65,6 +67,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 - (OSStatus) renderToneWithAudioBufferList:(AudioBufferList **)ioDataStar inNumberFrames:(UInt32)inNumberFrames{
     
+    [self.audioLock lock];
     AudioBufferList * ioData = *ioDataStar;
         
 	Float32 *lBuffer = (Float32 *)ioData->mBuffers[0].mData;
@@ -97,7 +100,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
             }
         }
     }
-    
+    [self.audioLock unlock];
     return noErr;
 }
 
@@ -157,6 +160,8 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 - (void)togglePlay
 {
+    [self.audioLock lock];
+    
 	if (self.toneUnit)
 	{
 		AudioOutputUnitStop(self.toneUnit);
@@ -176,6 +181,8 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 		err = AudioOutputUnitStart(self.toneUnit);
 		NSAssert1(err == noErr, @"Error starting unit: %hd", err);
     }
+    
+    [self.audioLock unlock];
 }
 
 - (void)stop
@@ -233,6 +240,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     self.playsOnce = YES;
     self.writesZeroes = NO;
     [self start];
+    NSLog(@"play once");
 }
 
 - (void) playContinously{
