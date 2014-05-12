@@ -15,7 +15,7 @@
     CGRect rect = CGRectMake(self.bounds.size.width/4, self.bounds.size.height/4,
                              self.bounds.size.width/2, self.bounds.size.height/2);
     rectLayer.path = CGPathCreateWithRect(rect, NULL);
-    rectLayer.strokeColor = [UIColor whiteColor].CGColor;
+    rectLayer.strokeColor = self.tintColor.CGColor;
     rectLayer.fillColor = [UIColor clearColor].CGColor;
     rectLayer.lineWidth = 3.0;
     

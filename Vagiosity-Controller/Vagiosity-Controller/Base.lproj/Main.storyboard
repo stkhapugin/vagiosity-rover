@@ -38,6 +38,16 @@
                                     <constraint firstAttribute="width" constant="160" id="nsE-3S-d3k"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQg-2i-dpz">
+                                <rect key="frame" x="217" y="370" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Get dat pussy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getDatPussyAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wDF-eI-EEJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -45,6 +55,8 @@
                             <constraint firstItem="TsE-uR-ujF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="J06-jd-qyD"/>
                             <constraint firstItem="Dj0-5X-tdk" firstAttribute="top" secondItem="sqF-rX-kcO" secondAttribute="bottom" id="KIy-m2-jVP"/>
                             <constraint firstAttribute="trailing" secondItem="sqF-rX-kcO" secondAttribute="trailing" id="fRl-FC-8c1"/>
+                            <constraint firstItem="sqF-rX-kcO" firstAttribute="top" secondItem="UQg-2i-dpz" secondAttribute="bottom" constant="8" id="irT-Xt-122"/>
+                            <constraint firstItem="sqF-rX-kcO" firstAttribute="centerX" secondItem="UQg-2i-dpz" secondAttribute="centerX" id="oJ2-a0-sK8"/>
                         </constraints>
                     </view>
                     <connections>

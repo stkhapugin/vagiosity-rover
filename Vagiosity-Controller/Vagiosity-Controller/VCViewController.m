@@ -55,4 +55,8 @@
     return @(-val*127);
 }
 
+- (IBAction)getDatPussyAction:(id)sender{
+    UIImageWriteToSavedPhotosAlbum(self.imageView.image, nil, nil, nil);
+}
+
 @end
