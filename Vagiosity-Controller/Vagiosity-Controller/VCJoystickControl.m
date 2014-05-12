@@ -22,38 +22,35 @@
     [self.layer addSublayer:rectLayer];
 }
 
-- (void) setXValue:(NSInteger)xValue {
+- (void) setXValue:(CGFloat)xValue {
     
     if (xValue > 1.0){
         xValue = 1.0;
     }
     
-    if (xValue < 1.0){
+    if (xValue < -1.0){
         xValue = -1.0;
     }
     
     _xValue = xValue;
-    NSLog(@"x:%d", xValue);
 }
 
-- (void) setYValue:(NSInteger)yValue {
+- (void) setYValue:(CGFloat)yValue {
     
     if (yValue > 1.0){
         yValue = 1.0;
     }
     
-    if (yValue < 1.0){
+    if (yValue < -1.0){
         yValue = -1.0;
     }
     
     _yValue = yValue;
-    NSLog(@"y:%d", yValue);
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     
     if (touches.count > 1) {
-        [self resetValue];
         return;
     }
     
@@ -68,15 +65,9 @@
     
     CGFloat xOffset = pt.x - self.bounds.size.width/2;
     CGFloat yOffset = pt.y - self.bounds.size.height/2;
-    self.xValue = xOffset/(self.bounds.size.width/2);
-    self.yValue = yOffset/(self.bounds.size.height/2);
+    self.xValue = xOffset/(self.bounds.size.width/4);
+    self.yValue = yOffset/(self.bounds.size.height/4);
 
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
-}
-
-- (void) resetValue{
-    self.xValue = 0;
-    self.yValue = 0;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 

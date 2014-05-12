@@ -10,7 +10,7 @@
 
 @interface VCJoystickControl : UIControl
 
-@property (nonatomic) NSInteger xValue; // -1 .. 1
-@property (nonatomic) NSInteger yValue; // -1 .. 1
+@property (nonatomic) CGFloat xValue; // -1 .. 1
+@property (nonatomic) CGFloat yValue; // -1 .. 1
 
 @end
