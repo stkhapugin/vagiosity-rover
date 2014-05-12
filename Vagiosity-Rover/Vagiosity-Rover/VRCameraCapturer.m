@@ -97,7 +97,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
     // Create an image object from the Quartz image
     UIImage *image = [[UIImage alloc] initWithCGImage: quartzImage
-                                                scale: 1.0
+                                                scale: 0.5
                                           orientation: UIImageOrientationRight];
     
     // Release the Quartz image
