@@ -33,6 +33,7 @@
     }
     
     _xValue = xValue;
+    NSLog(@"x:%d", xValue);
 }
 
 - (void) setYValue:(NSInteger)yValue {
@@ -46,6 +47,7 @@
     }
     
     _yValue = yValue;
+    NSLog(@"y:%d", yValue);
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -59,7 +61,7 @@
     
     CGPoint pt = [touch locationInView:self];
     
-    
+    [self updateValuesWithPoint:pt];
 }
 
 - (void) updateValuesWithPoint:(CGPoint) pt {

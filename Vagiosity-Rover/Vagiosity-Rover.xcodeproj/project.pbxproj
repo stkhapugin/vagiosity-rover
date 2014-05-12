@@ -141,13 +141,12 @@
 		596FBB4618BE2D9500367E4E /* Vagiosity-Rover */ = {
 			isa = PBXGroup;
 			children = (
+				6F042C08192097490072F3AF /* View Controllers */,
 				5950B1D5190D4E89000E5767 /* Connectivity */,
 				598F349418C398EA005D3E8A /* Rover Manipulations */,
 				596FBB4F18BE2D9500367E4E /* VRAppDelegate.h */,
 				596FBB5018BE2D9500367E4E /* VRAppDelegate.m */,
 				596FBB5218BE2D9500367E4E /* Main.storyboard */,
-				596FBB5518BE2D9500367E4E /* VRViewController.h */,
-				596FBB5618BE2D9500367E4E /* VRViewController.m */,
 				596FBB5818BE2D9500367E4E /* Images.xcassets */,
 				596FBB4718BE2D9500367E4E /* Supporting Files */,
 			);
@@ -202,6 +201,15 @@
 				598F349618C39910005D3E8A /* VRVagiosityController.m */,
 			);
 			name = "Rover Manipulations";
+			sourceTree = "<group>";
+		};
+		6F042C08192097490072F3AF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				596FBB5518BE2D9500367E4E /* VRViewController.h */,
+				596FBB5618BE2D9500367E4E /* VRViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -19,6 +19,7 @@
 
 - (void) dealloc {
     self.controller = nil;
+    [self.server removeObserver:self forKeyPath:@"lastReceivedValues"];
 }
 
 - (void)viewDidLoad
@@ -31,6 +32,40 @@
     [self sendCurrentValues];
     self.server = [VRControllerServer new];
     [self.server startServer];
+    
+    [self.server addObserver:self forKeyPath:@"lastReceivedValues" options:0 context:nil];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"lastReceivedValues"] && object == self.server){
+        [self receiveValues];
+    }
+}
+
+- (void) receiveValues{
+    if (![NSThread isMainThread]){
+        [self performSelectorOnMainThread:@selector(receiveValues)
+                               withObject:nil
+                            waitUntilDone:NO];
+        return;
+    }
+    
+    NSAssert(self.server.lastReceivedValues.count == self.valueSliders.count, @"");
+    
+    for (int i = 0; i < self.valueSliders.count; i++){
+        UISlider * slider = self.valueSliders[i];
+        NSNumber * val = self.server.lastReceivedValues[i];
+        
+        slider.value = [val floatValue];
+    }
+    
+    [self updateLabels];
+    [self sendCurrentValues];
+    [self.controller playValuesOnce];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
