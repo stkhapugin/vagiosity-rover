@@ -27,6 +27,7 @@
 		598F349118C376E2005D3E8A /* VRToneGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 598F349018C376E2005D3E8A /* VRToneGenerator.m */; };
 		598F349318C37703005D3E8A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 598F349218C37703005D3E8A /* AudioToolbox.framework */; };
 		598F349718C39910005D3E8A /* VRVagiosityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 598F349618C39910005D3E8A /* VRVagiosityController.m */; };
+		6F042C0C192098DB0072F3AF /* VRCameraCapturer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F042C0B192098DB0072F3AF /* VRCameraCapturer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		598F349218C37703005D3E8A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		598F349518C39910005D3E8A /* VRVagiosityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRVagiosityController.h; sourceTree = "<group>"; };
 		598F349618C39910005D3E8A /* VRVagiosityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRVagiosityController.m; sourceTree = "<group>"; };
+		6F042C0A192098DB0072F3AF /* VRCameraCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRCameraCapturer.h; sourceTree = "<group>"; };
+		6F042C0B192098DB0072F3AF /* VRCameraCapturer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRCameraCapturer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,7 @@
 		596FBB4618BE2D9500367E4E /* Vagiosity-Rover */ = {
 			isa = PBXGroup;
 			children = (
+				6F042C09192098C20072F3AF /* Camera capture */,
 				6F042C08192097490072F3AF /* View Controllers */,
 				5950B1D5190D4E89000E5767 /* Connectivity */,
 				598F349418C398EA005D3E8A /* Rover Manipulations */,
@@ -210,6 +214,15 @@
 				596FBB5618BE2D9500367E4E /* VRViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6F042C09192098C20072F3AF /* Camera capture */ = {
+			isa = PBXGroup;
+			children = (
+				6F042C0A192098DB0072F3AF /* VRCameraCapturer.h */,
+				6F042C0B192098DB0072F3AF /* VRCameraCapturer.m */,
+			);
+			name = "Camera capture";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +330,7 @@
 				596FBB5718BE2D9500367E4E /* VRViewController.m in Sources */,
 				598F349118C376E2005D3E8A /* VRToneGenerator.m in Sources */,
 				596FBB5118BE2D9500367E4E /* VRAppDelegate.m in Sources */,
+				6F042C0C192098DB0072F3AF /* VRCameraCapturer.m in Sources */,
 				596FBB4D18BE2D9500367E4E /* main.m in Sources */,
 				5950B1DA190D4ED4000E5767 /* VRControllerServer.m in Sources */,
 				598F349718C39910005D3E8A /* VRVagiosityController.m in Sources */,

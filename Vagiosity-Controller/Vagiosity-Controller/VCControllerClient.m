@@ -17,6 +17,8 @@
 @end
 
 @implementation VCControllerClient
+
+/// lazy getter
 - (MCPeerID *) ownPeerID
 {
     if (!_ownPeerID){
@@ -28,15 +30,20 @@
 
 - (void) connectIfPossible
 {
-    MCNearbyServiceBrowser *browser = [[MCNearbyServiceBrowser alloc] initWithPeer:self.ownPeerID
-                                                                       serviceType:@"VAGINA"];
-    browser.delegate = self;
+    if (!self.browser){
+        MCNearbyServiceBrowser *browser =
+        [[MCNearbyServiceBrowser alloc] initWithPeer:self.ownPeerID
+                                         serviceType:@"VAGINA"];
+        browser.delegate = self;
+        self.browser = browser;
+    }
+    
+    if (!self.session){
+        self.session = [[MCSession alloc] initWithPeer:self.ownPeerID];
+        self.session.delegate = self;
+    }
     
     [browser startBrowsingForPeers];
-    
-    self.browser = browser;
-    self.session = [[MCSession alloc] initWithPeer:self.ownPeerID];
-    self.session.delegate = self;
     NSLog(@"started browsing");
 }
 
