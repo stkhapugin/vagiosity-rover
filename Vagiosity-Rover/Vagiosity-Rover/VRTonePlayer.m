@@ -175,6 +175,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 	}
 	else
 	{
+      self.lastBufferedFrame = 0;
 		[self createToneUnit];
 		
 		// Stop changing parameters on the unit
@@ -243,9 +244,10 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 - (void) playOnce{
     //[self stop];
+    self.lastBufferedFrame = 0;
     self.playsOnce = YES;
     self.writesZeroes = NO;
-    //[self start];
+    [self start];
 }
 
 - (void) playContinously{

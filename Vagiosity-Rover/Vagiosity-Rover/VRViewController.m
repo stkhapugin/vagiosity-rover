@@ -41,7 +41,7 @@
     
     [self.server addObserver:self forKeyPath:@"lastReceivedValues" options:0 context:nil];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(sendCurrentFrame) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(sendCurrentFrame) userInfo:nil repeats:YES];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath
