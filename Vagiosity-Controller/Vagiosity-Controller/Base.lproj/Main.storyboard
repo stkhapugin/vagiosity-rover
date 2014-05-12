@@ -16,14 +16,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TsE-uR-ujF" customClass="VCJoystickControl">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsE-uR-ujF" customClass="VCJoystickControl">
                                 <rect key="frame" x="0.0" y="408" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="XDW-GZ-ex1"/>
+                                    <constraint firstAttribute="width" constant="160" id="w8H-dI-pqU"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqF-rX-kcO" customClass="VCJoystickControl">
+                                <rect key="frame" x="160" y="408" width="160" height="160"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="VcE-yd-8f2"/>
+                                    <constraint firstAttribute="width" constant="160" id="nsE-3S-d3k"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dj0-5X-tdk" firstAttribute="top" secondItem="TsE-uR-ujF" secondAttribute="bottom" id="1yi-Tl-AgP"/>
+                            <constraint firstItem="TsE-uR-ujF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="J06-jd-qyD"/>
+                            <constraint firstItem="Dj0-5X-tdk" firstAttribute="top" secondItem="sqF-rX-kcO" secondAttribute="bottom" id="KIy-m2-jVP"/>
+                            <constraint firstAttribute="trailing" secondItem="sqF-rX-kcO" secondAttribute="trailing" id="fRl-FC-8c1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cameraJoystick" destination="TsE-uR-ujF" id="LRw-5Z-WZW"/>
+                        <outlet property="movementJoystick" destination="sqF-rX-kcO" id="5HZ-dV-xOJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

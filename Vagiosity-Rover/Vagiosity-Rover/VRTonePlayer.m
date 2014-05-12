@@ -72,7 +72,6 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
     NSAssert((lBuffer != NULL)&&(rBuffer != NULL), @"You have to have a stereo audio session initialized");
 
-    NSLog(@"buffer size: %d", (unsigned int)inNumberFrames);
     UInt32 framesPerNumber = 8;
 	// Generate the samples
 	for (UInt32 frame = 0; frame < inNumberFrames; frame++)

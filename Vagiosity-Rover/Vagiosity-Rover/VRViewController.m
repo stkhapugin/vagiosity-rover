@@ -66,7 +66,7 @@
         UISlider * slider = self.valueSliders[i];
         NSNumber * val = self.server.lastReceivedValues[i];
         
-        slider.value = [val floatValue];
+        slider.value = [val floatValue] + 128;
     }
     
     [self updateLabels];

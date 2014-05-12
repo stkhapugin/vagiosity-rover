@@ -49,7 +49,7 @@
 
 - (void) sendValues:(NSArray *)values {
     
-    if (!self.session){
+    if (self.session.connectedPeers.count == 0){
         return;
     }
     

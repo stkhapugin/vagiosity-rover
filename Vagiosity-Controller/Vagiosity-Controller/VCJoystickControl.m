@@ -71,4 +71,9 @@
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    self.xValue = 0;
+    self.yValue = 0;
+}
+
 @end
