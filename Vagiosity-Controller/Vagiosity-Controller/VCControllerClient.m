@@ -43,7 +43,7 @@
         self.session.delegate = self;
     }
     
-    [browser startBrowsingForPeers];
+    [self.browser startBrowsingForPeers];
     NSLog(@"started browsing");
 }
 
