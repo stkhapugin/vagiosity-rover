@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
-@protocol VRCameraCapturer <NSObject>
+@protocol VRCameraCapturerDelegate <NSObject>
 
 - (void) receiveNewFrame:(UIImage *)frame;
 
 @end
 
-@interface VRCameraCapturer : NSObject
+@interface VRCameraCapturer : NSObject <AVCaptureVideoDataOutputSampleBufferDelegate>
 
+@property (nonatomic, weak) id <VRCameraCapturerDelegate> delegate;
 - (void) startCameraCapture;
 
 @end

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VRViewController : UIViewController
+@interface VRViewController : UIViewController 
 
 @property (nonatomic, strong) IBOutletCollection(UISlider) NSArray * valueSliders;
 @property (nonatomic ,strong) IBOutletCollection(UILabel)  NSArray * valueLabels;
-
+@property (nonatomic, weak) IBOutlet UIImageView * imageView;
 @end

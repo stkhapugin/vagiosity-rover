@@ -9,10 +9,12 @@
 #import "VRViewController.h"
 #import "VRVagiosityController.h"
 #import "VRControllerServer.h"
+#import "VRCameraCapturer.h"
 
-@interface VRViewController ()
+@interface VRViewController ()<VRCameraCapturerDelegate>
 @property (nonatomic, strong) VRVagiosityController * controller;
 @property (nonatomic, strong) VRControllerServer * server;
+@property (nonatomic, strong) VRCameraCapturer * capturer;
 @end
 
 @implementation VRViewController
@@ -32,6 +34,10 @@
     [self sendCurrentValues];
     self.server = [VRControllerServer new];
     [self.server startServer];
+    
+    self.capturer = [VRCameraCapturer new];
+    self.capturer.delegate = self;
+    [self.capturer startCameraCapture];
     
     [self.server addObserver:self forKeyPath:@"lastReceivedValues" options:0 context:nil];
 }
@@ -96,5 +102,11 @@
 
 - (IBAction)playPressed:(id)sender{
     [self.controller playValuesContinously];
+}
+
+- (void) receiveNewFrame:(UIImage *)frame{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.imageView.image = frame;
+    });
 }
 @end
