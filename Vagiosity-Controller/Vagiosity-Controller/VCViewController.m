@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) IBOutlet VCJoystickControl * cameraJoystick;
 @property (nonatomic, weak) IBOutlet VCJoystickControl * movementJoystick;
+@property (nonatomic, weak) IBOutlet UIImageView * imageView;
 
 @property (nonatomic, strong) VCControllerClient * client;
 
@@ -27,6 +28,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.client = [VCControllerClient new];
     [self.client connectIfPossible];
+    self.client.frameReceivedBlock = ^(UIImage *img){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageView.image = img;
+        });
+    };
     
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(tick) userInfo:nil repeats:YES];
 }

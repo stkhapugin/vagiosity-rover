@@ -61,6 +61,18 @@
     self.session = nil;
 }
 
+- (void) sendData:(NSData *)data{
+    
+    if (self.session.connectedPeers.count == 0){
+        return;
+    }
+    
+    [self.session sendData:data
+                   toPeers:self.session.connectedPeers
+                  withMode:MCSessionSendDataUnreliable
+                     error:nil];
+}
+
 #pragma mark - MCNearbyAdvertiserDelegate
 
 - (void) advertiser:(MCNearbyServiceAdvertiser *)advertiser

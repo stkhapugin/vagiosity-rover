@@ -68,6 +68,10 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 - (OSStatus) renderToneWithAudioBufferList:(AudioBufferList **)ioDataStar inNumberFrames:(UInt32)inNumberFrames{
     
     [self.audioLock lock];
+    if (!self.toneUnit){
+        return noErr;
+    }
+    
     AudioBufferList * ioData = *ioDataStar;
         
 	Float32 *lBuffer = (Float32 *)ioData->mBuffers[0].mData;
@@ -229,25 +233,26 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         return;
     }
     
-    [self stop];
+    //[self stop];
+    [self.audioLock lock];
     self.leftChannelBuffer = leftChannelBits;
     self.rightChannelBuffer = rightChannelBits;
     self.signalLength = length;
+    [self.audioLock unlock];
 }
 
 - (void) playOnce{
-    [self stop];
+    //[self stop];
     self.playsOnce = YES;
     self.writesZeroes = NO;
-    [self start];
-    NSLog(@"play once");
+    //[self start];
 }
 
 - (void) playContinously{
-    [self stop];
+    //[self stop];
     self.playsOnce = NO;
     self.writesZeroes = NO;
-    [self start];
+    //[self start];
 }
 
 

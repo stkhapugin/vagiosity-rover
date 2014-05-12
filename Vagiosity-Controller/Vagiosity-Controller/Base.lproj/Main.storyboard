@@ -16,10 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hoy-ti-EBZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsE-uR-ujF" customClass="VCJoystickControl">
                                 <rect key="frame" x="0.0" y="408" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="XDW-GZ-ex1"/>
                                     <constraint firstAttribute="width" constant="160" id="w8H-dI-pqU"/>
@@ -28,7 +32,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqF-rX-kcO" customClass="VCJoystickControl">
                                 <rect key="frame" x="160" y="408" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="VcE-yd-8f2"/>
                                     <constraint firstAttribute="width" constant="160" id="nsE-3S-d3k"/>
@@ -45,6 +49,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraJoystick" destination="TsE-uR-ujF" id="LRw-5Z-WZW"/>
+                        <outlet property="imageView" destination="Hoy-ti-EBZ" id="6zx-g3-fI5"/>
                         <outlet property="movementJoystick" destination="sqF-rX-kcO" id="5HZ-dV-xOJ"/>
                     </connections>
                 </viewController>

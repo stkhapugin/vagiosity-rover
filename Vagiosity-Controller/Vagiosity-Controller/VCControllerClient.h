@@ -14,5 +14,6 @@
 - (void) sendValues:(NSArray *)values;
 
 @property (nonatomic, copy) void(^connectionBlock)();
+@property (nonatomic, copy) void(^frameReceivedBlock)(UIImage * frame);
 
 @end

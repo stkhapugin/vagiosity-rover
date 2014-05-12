@@ -40,6 +40,8 @@
     [self.capturer startCameraCapture];
     
     [self.server addObserver:self forKeyPath:@"lastReceivedValues" options:0 context:nil];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(sendCurrentFrame) userInfo:nil repeats:YES];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -108,5 +110,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.imageView.image = frame;
     });
+}
+
+
+- (void) sendCurrentFrame {
+    [self.server sendData:UIImageJPEGRepresentation(self.imageView.image, 0.3)];
 }
 @end

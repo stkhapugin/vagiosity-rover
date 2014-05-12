@@ -117,6 +117,10 @@ withDiscoveryInfo:(NSDictionary *)info{
 
 - (void) session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID{
     
+    UIImage * frame = [[UIImage alloc] initWithData:data];
+    if (self.frameReceivedBlock){
+        self.frameReceivedBlock(frame);
+    }
 }
 
 - (void) session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error{
