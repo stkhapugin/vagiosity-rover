@@ -16,4 +16,6 @@
 /// KVO-compliant
 @property (nonatomic, readonly) NSArray * lastReceivedValues;
 
+- (void) sendData:(NSData *)data;
+
 @end

@@ -14,14 +14,15 @@
 - (OSStatus) renderToneWithAudioBufferList:(AudioBufferList **)ioDataStar inNumberFrames:(UInt32)inNumberFrames;
 - (void) stop;
 
-@property (nonatomic) Float32 * leftChannelBuffer;
-@property (nonatomic) Float32 * rightChannelBuffer;
+@property (atomic) Float32 * leftChannelBuffer;
+@property (atomic) Float32 * rightChannelBuffer;
 @property (nonatomic) NSUInteger signalLength;
 @property (nonatomic) NSUInteger lastBufferedFrame;
 @property (nonatomic) AudioComponentInstance toneUnit;
 @property (nonatomic) int sampleRate;
 @property (nonatomic) BOOL playsOnce;
 @property (nonatomic) BOOL writesZeroes;
+@property (nonatomic, retain) NSLock * audioLock;
 
 @end
     
@@ -58,12 +59,18 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     self = [super init];
     if (self){
         [self initializeAudioSession];
+        self.audioLock = [NSLock new];
     }
     
     return self;
 }
 
 - (OSStatus) renderToneWithAudioBufferList:(AudioBufferList **)ioDataStar inNumberFrames:(UInt32)inNumberFrames{
+    
+    [self.audioLock lock];
+    if (!self.toneUnit){
+        return noErr;
+    }
     
     AudioBufferList * ioData = *ioDataStar;
         
@@ -72,7 +79,6 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
     NSAssert((lBuffer != NULL)&&(rBuffer != NULL), @"You have to have a stereo audio session initialized");
 
-    NSLog(@"buffer size: %d", (unsigned int)inNumberFrames);
     UInt32 framesPerNumber = 8;
 	// Generate the samples
 	for (UInt32 frame = 0; frame < inNumberFrames; frame++)
@@ -98,7 +104,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
             }
         }
     }
-    
+    [self.audioLock unlock];
     return noErr;
 }
 
@@ -158,6 +164,8 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 - (void)togglePlay
 {
+    [self.audioLock lock];
+    
 	if (self.toneUnit)
 	{
 		AudioOutputUnitStop(self.toneUnit);
@@ -167,6 +175,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 	}
 	else
 	{
+      self.lastBufferedFrame = 0;
 		[self createToneUnit];
 		
 		// Stop changing parameters on the unit
@@ -177,6 +186,8 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 		err = AudioOutputUnitStart(self.toneUnit);
 		NSAssert1(err == noErr, @"Error starting unit: %hd", err);
     }
+    
+    [self.audioLock unlock];
 }
 
 - (void)stop
@@ -223,24 +234,27 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         return;
     }
     
-    [self stop];
+    //[self stop];
+    [self.audioLock lock];
     self.leftChannelBuffer = leftChannelBits;
     self.rightChannelBuffer = rightChannelBits;
     self.signalLength = length;
+    [self.audioLock unlock];
 }
 
 - (void) playOnce{
-    [self stop];
+    //[self stop];
+    self.lastBufferedFrame = 0;
     self.playsOnce = YES;
     self.writesZeroes = NO;
     [self start];
 }
 
 - (void) playContinously{
-    [self stop];
+    //[self stop];
     self.playsOnce = NO;
     self.writesZeroes = NO;
-    [self start];
+    //[self start];
 }
 
 

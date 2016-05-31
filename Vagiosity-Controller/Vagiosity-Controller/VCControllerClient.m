@@ -17,6 +17,8 @@
 @end
 
 @implementation VCControllerClient
+
+/// lazy getter
 - (MCPeerID *) ownPeerID
 {
     if (!_ownPeerID){
@@ -28,37 +30,32 @@
 
 - (void) connectIfPossible
 {
-    MCNearbyServiceBrowser *browser = [[MCNearbyServiceBrowser alloc] initWithPeer:self.ownPeerID
-                                                                       serviceType:@"vagiosityctrl"];
-    browser.delegate = self;
+    if (!self.browser){
+        MCNearbyServiceBrowser *browser =
+        [[MCNearbyServiceBrowser alloc] initWithPeer:self.ownPeerID
+                                         serviceType:@"VAGINA"];
+        browser.delegate = self;
+        self.browser = browser;
+    }
     
-    [browser startBrowsingForPeers];
+    if (!self.session){
+        self.session = [[MCSession alloc] initWithPeer:self.ownPeerID];
+        self.session.delegate = self;
+    }
     
-    self.browser = browser;
-    self.session = [[MCSession alloc] initWithPeer:self.ownPeerID];
-    self.session.delegate = self;
-    
-    MCBrowserViewController *browserViewController =
-    [[MCBrowserViewController alloc] initWithBrowser:browser
-                                             session:self.session];
-    browserViewController.delegate = self;
-    UIViewController * ctrl = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    [ctrl presentViewController:browserViewController
-                       animated:YES
-                     completion:
-     ^{
-         [browser startBrowsingForPeers];
-     }];
+    [self.browser startBrowsingForPeers];
+    NSLog(@"started browsing");
 }
 
 - (void) sendValues:(NSArray *)values {
     
-    if (!self.session){
+    if (self.session.connectedPeers.count == 0){
         return;
     }
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:values];
     NSError *error = nil;
+    
     if (![self.session sendData:data
                         toPeers:self.session.connectedPeers
                        withMode:MCSessionSendDataReliable
@@ -77,6 +74,12 @@
 withDiscoveryInfo:(NSDictionary *)info{
     
     [browser invitePeer:peerID toSession:self.session withContext:nil timeout:60.0];
+    NSLog(@"found peer");
+}
+
+- (void) browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID{
+    [browser startBrowsingForPeers];
+    NSLog(@"lost peer");
 }
 
 #pragma mark - MCSessionDelegate
@@ -104,4 +107,23 @@ withDiscoveryInfo:(NSDictionary *)info{
     }
 }
 
+- (void) session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID{
+    
+}
+
+- (void) session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress{
+    
+}
+
+- (void) session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID{
+    
+    UIImage * frame = [[UIImage alloc] initWithData:data];
+    if (self.frameReceivedBlock){
+        self.frameReceivedBlock(frame);
+    }
+}
+
+- (void) session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error{
+    
+}
 @end

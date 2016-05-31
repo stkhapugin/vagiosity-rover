@@ -14,21 +14,13 @@
 @property (nonatomic, strong) MCPeerID * ownPeerID;
 @property (nonatomic, strong) MCSession * session;
 @property (nonatomic, strong) NSArray * lastReceivedValues;
+@property (nonatomic, strong) MCNearbyServiceAdvertiser * advertiser;
 
 @end
 
 @implementation VRControllerServer
 
 #pragma mark - setters and getters
-
-- (MCPeerID *) ownPeerID
-{
-    if (!_ownPeerID){
-        self.ownPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
-    }
-    
-    return _ownPeerID;
-}
 
 /// KVO setter
 - (void) setLastReceivedValues:(NSArray *)lastReceivedValues
@@ -46,23 +38,45 @@
 
 - (void) startServer
 {
+    self.ownPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
+    NSAssert(self.ownPeerID, @"");
+    
     MCNearbyServiceAdvertiser *advertiser =
     [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.ownPeerID
                                       discoveryInfo:nil
-                                        serviceType:@"vagiosityctrl"];
+                                        serviceType:@"VAGINA"];
+    
+    NSAssert(advertiser, @"");
+    
     advertiser.delegate = self;
     [advertiser startAdvertisingPeer];
+    self.advertiser = advertiser; //< we are responsible to retain it
+    NSLog(@"started advertising");
 }
 
 - (void) stopServer
 {
+    NSLog(@"stopping server");
     [self.session disconnect];
     self.session = nil;
 }
 
+- (void) sendData:(NSData *)data{
+    
+    if (self.session.connectedPeers.count == 0){
+        return;
+    }
+    
+    [self.session sendData:data
+                   toPeers:self.session.connectedPeers
+                  withMode:MCSessionSendDataUnreliable
+                     error:nil];
+}
+
 #pragma mark - MCNearbyAdvertiserDelegate
 
-- (void) advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error{
+- (void) advertiser:(MCNearbyServiceAdvertiser *)advertiser
+didNotStartAdvertisingPeer:(NSError *)error{
     NSLog(@"%@", error);
 }
 
@@ -71,32 +85,45 @@ didReceiveInvitationFromPeer:(MCPeerID *)peerID
         withContext:(NSData *)context
   invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
-    if (self.session != nil){
-        NSLog(@"Blocked duplicate peer: %@", [peerID displayName]);
-        invitationHandler(NO, nil);
-        return;
-    }
-    
     self.session = [[MCSession alloc] initWithPeer:self.ownPeerID
                                   securityIdentity:nil
                               encryptionPreference:MCEncryptionNone];
     
     self.session.delegate = self;
-    invitationHandler(YES, self.session);
     NSLog(@"Accepted peer: %@", [peerID displayName]);
+
+    invitationHandler(YES, self.session);
 }
 
 #pragma mark - MCSessionDelegate
+
+- (void) session:(MCSession *)session
+            peer:(MCPeerID *)peerID
+  didChangeState:(MCSessionState)state{
+    
+}
+
+- (void) session:(MCSession *)session
+didStartReceivingResourceWithName:(NSString *)resourceName
+        fromPeer:(MCPeerID *)peerID
+    withProgress:(NSProgress *)progress{
+    
+}
+
+- (void) session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID{
+    
+}
+
+- (void) session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error{
+    
+}
 
 - (void)session:(MCSession *)session
  didReceiveData:(NSData *)data
        fromPeer:(MCPeerID *)peerID
 {
-    NSKeyedUnarchiver * unarch = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    NSArray * values = [unarch decodeObject];
-    [unarch finishDecoding];
-    self.lastReceivedValues = values;
     
-    NSLog(@"Received values: %@", values);
+    NSArray * values = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    self.lastReceivedValues = values;
 }
 @end

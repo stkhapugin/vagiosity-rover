@@ -23,6 +23,7 @@
 		596FBBA318BE2DB000367E4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBB8518BE2DB000367E4E /* UIKit.framework */; };
 		596FBBAB18BE2DB000367E4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 596FBBA918BE2DB000367E4E /* InfoPlist.strings */; };
 		596FBBAD18BE2DB000367E4E /* Vagiosity_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 596FBBAC18BE2DB000367E4E /* Vagiosity_ControllerTests.m */; };
+		6F042C0719208A930072F3AF /* VCJoystickControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F042C0619208A930072F3AF /* VCJoystickControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		596FBBA818BE2DB000367E4E /* Vagiosity-ControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Vagiosity-ControllerTests-Info.plist"; sourceTree = "<group>"; };
 		596FBBAA18BE2DB000367E4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		596FBBAC18BE2DB000367E4E /* Vagiosity_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vagiosity_ControllerTests.m; sourceTree = "<group>"; };
+		6F042C0519208A930072F3AF /* VCJoystickControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCJoystickControl.h; sourceTree = "<group>"; };
+		6F042C0619208A930072F3AF /* VCJoystickControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCJoystickControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,7 @@
 		596FBB8718BE2DB000367E4E /* Vagiosity-Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F042C04192089EB0072F3AF /* Joystick */,
 				5950B1D4190D4E81000E5767 /* Connectivity */,
 				596FBB9018BE2DB000367E4E /* VCAppDelegate.h */,
 				596FBB9118BE2DB000367E4E /* VCAppDelegate.m */,
@@ -167,6 +171,15 @@
 				596FBBA918BE2DB000367E4E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F042C04192089EB0072F3AF /* Joystick */ = {
+			isa = PBXGroup;
+			children = (
+				6F042C0519208A930072F3AF /* VCJoystickControl.h */,
+				6F042C0619208A930072F3AF /* VCJoystickControl.m */,
+			);
+			name = Joystick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +285,7 @@
 			files = (
 				596FBB8E18BE2DB000367E4E /* main.m in Sources */,
 				596FBB9818BE2DB000367E4E /* VCViewController.m in Sources */,
+				6F042C0719208A930072F3AF /* VCJoystickControl.m in Sources */,
 				596FBB9218BE2DB000367E4E /* VCAppDelegate.m in Sources */,
 				5950B1DD190D5516000E5767 /* VCControllerClient.m in Sources */,
 			);

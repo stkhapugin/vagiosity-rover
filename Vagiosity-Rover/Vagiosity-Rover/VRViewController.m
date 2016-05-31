@@ -9,16 +9,19 @@
 #import "VRViewController.h"
 #import "VRVagiosityController.h"
 #import "VRControllerServer.h"
+#import "VRCameraCapturer.h"
 
-@interface VRViewController ()
+@interface VRViewController ()<VRCameraCapturerDelegate>
 @property (nonatomic, strong) VRVagiosityController * controller;
 @property (nonatomic, strong) VRControllerServer * server;
+@property (nonatomic, strong) VRCameraCapturer * capturer;
 @end
 
 @implementation VRViewController
 
 - (void) dealloc {
     self.controller = nil;
+    [self.server removeObserver:self forKeyPath:@"lastReceivedValues"];
 }
 
 - (void)viewDidLoad
@@ -31,6 +34,46 @@
     [self sendCurrentValues];
     self.server = [VRControllerServer new];
     [self.server startServer];
+    
+    self.capturer = [VRCameraCapturer new];
+    self.capturer.delegate = self;
+    [self.capturer startCameraCapture];
+    
+    [self.server addObserver:self forKeyPath:@"lastReceivedValues" options:0 context:nil];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(sendCurrentFrame) userInfo:nil repeats:YES];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath
+                       ofObject:(id)object
+                         change:(NSDictionary *)change
+                        context:(void *)context{
+    
+    if ([keyPath isEqualToString:@"lastReceivedValues"] && object == self.server){
+        [self receiveValues];
+    }
+}
+
+- (void) receiveValues{
+    if (![NSThread isMainThread]){
+        [self performSelectorOnMainThread:@selector(receiveValues)
+                               withObject:nil
+                            waitUntilDone:NO];
+        return;
+    }
+    
+    NSAssert(self.server.lastReceivedValues.count == self.valueSliders.count, @"");
+    
+    for (int i = 0; i < self.valueSliders.count; i++){
+        UISlider * slider = self.valueSliders[i];
+        NSNumber * val = self.server.lastReceivedValues[i];
+        
+        slider.value = [val floatValue] + 128;
+    }
+    
+    [self updateLabels];
+    [self sendCurrentValues];
+    [self.controller playValuesOnce];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -61,5 +104,16 @@
 
 - (IBAction)playPressed:(id)sender{
     [self.controller playValuesContinously];
+}
+
+- (void) receiveNewFrame:(UIImage *)frame{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.imageView.image = frame;
+    });
+}
+
+
+- (void) sendCurrentFrame {
+    [self.server sendData:UIImageJPEGRepresentation(self.imageView.image, 0.3)];
 }
 @end
